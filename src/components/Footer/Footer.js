@@ -1,5 +1,6 @@
 import React, { Component}  from 'react';
 import PropTypes from 'prop-types';
+import Typography from 'material-ui/Typography';
 import { withStyles } from 'material-ui/styles';
 import Grid from 'material-ui/Grid';
 
@@ -24,7 +25,12 @@ function  Footer(props: ProvidedProps) {
 
     return (
         <Grid xs={12}>
+            <Typography type="body2"
+                        gutterBottom
+                        align="center"
+            >
                 {today.getFullYear()}   &copy; Łukasz Basaj
+            </Typography>
         </Grid>
     )
 
