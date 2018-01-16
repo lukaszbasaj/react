@@ -4,7 +4,7 @@ import Typography from 'material-ui/Typography';
 class Header extends Component {
     render() {
         return (
-            <Typography type="display2"
+            <Typography type="display1"
                         gutterBottom
                         align="center"
             >
