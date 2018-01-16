@@ -1,28 +1,48 @@
 import React, { Component } from 'react';
-import {BrowserRouter as Router, Route } from 'react-router-dom';
-
-import Dashboard from './components/Dashboard';
 import Header from './components/Header';
 import ToDo from './components/ToDo';
-import Form from './components/form/index';
+import PropTypes from 'prop-types';
 
 import './App.css';
+import Card, { CardContent } from 'material-ui/Card';
+import { withStyles } from 'material-ui/styles';
+import Grid from 'material-ui/Grid';
 
-class App extends Component {
-    render() {
-        return (
-            <Router>
-                <div>
-                    <Header/>
-                    <Route exact path='/' component={Dashboard}/>
-                    <Route path='/todo' component={ToDo}/>
-                    <Route path='/counter' component={null}/>
-                    <Route path='/form' component={Form}/>
+const App = (props) => {
+    const { classes } = props;
+    return (
+        <Grid
+            container
+            justify= "center"
+        >
+            <Grid
+                xs={12}
+                sm={6}
+                align="center">
+                <Card
+                    className={classes.card}
+                    align="center">
+                    <CardContent align="center">
+                        <Header/>
+                        <ToDo />
+                        <Footer/>
+                    </CardContent>
+                </Card>
+            </Grid>
+        </Grid>
+    )
+};
 
-                 </div>
-            </Router>
-        );
-    }
-}
+const styles = theme => ({
+    card: {
+        minWidth: 300,
+        maxWidth: 600,
+    },
 
-export default App;
+});
+
+App.propTypes = {
+    classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(App);
