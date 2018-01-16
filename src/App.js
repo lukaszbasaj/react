@@ -1,7 +1,9 @@
-import React, { Component } from 'react';
-import Header from './components/Header';
-import ToDo from './components/ToDo';
+import React from 'react';
+import Header from './components/Header/Header';
+import ToDo from './components/Todo/Todo';
 import PropTypes from 'prop-types';
+import Footer from './components/Footer/Footer';
+
 
 import './App.css';
 import Card, { CardContent } from 'material-ui/Card';
@@ -16,13 +18,18 @@ const App = (props) => {
             justify= "center"
         >
             <Grid
-                xs={12}
+                xs={6}
                 sm={6}
+
                 align="center">
                 <Card
                     className={classes.card}
-                    align="center">
-                    <CardContent align="center">
+                    align="center"
+                    vertical-align="middle"
+                    >
+                    <CardContent align="center"
+                                 vertical-align="middle"
+                    >
                         <Header/>
                         <ToDo />
                         <Footer/>
@@ -36,7 +43,7 @@ const App = (props) => {
 const styles = theme => ({
     card: {
         minWidth: 300,
-        maxWidth: 600,
+        maxWidth: 1200,
     },
 
 });
