@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Header from './components/Header';
 import ToDo from './components/ToDo';
 import PropTypes from 'prop-types';
+import Footer from './components/Footer';
 
 import './App.css';
 import Card, { CardContent } from 'material-ui/Card';
