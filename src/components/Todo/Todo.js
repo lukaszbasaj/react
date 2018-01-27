@@ -1,54 +1,94 @@
 import React, {Component} from 'react';
-import AddBox from '../../components/Todo/elements/AddBoxElement';
-import { database } from '../../firebase/firebase';
-import TasksList from '../../components/Todo/elements/TasksListElement';
-import FilterBox from '../../components/Todo/elements/FilterBoxElement';
+import TasksList from './elements/TasksListElement';
+import {connect} from 'react-redux';
+import {add, search, remove, checkboxChange, init} from '../state';
+import AddCircle from 'material-ui-icons/AddCircle';
 
-class ToDo extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            tasks: [],
-            fiterText: '',
+import TextField from 'material-ui/TextField';
 
+
+const mapStateToProps = state => ({tasksList: state.tasks.tasks, query: state.tasks.query});
+
+const mapDispatchToProps = dispatch => ({
+    addNewTask: task => dispatch(add(task)),
+    searchTask: value => dispatch(search(value)),
+    checkboxChange: (taskId, checked, taskName) => dispatch(checkboxChange(taskId, checked, taskName)),
+    removeTask: taskId => dispatch(remove(taskId)),
+    initTasks: () => dispatch(init())
+});
+
+class Todo extends Component {
+
+    state = {
+        task: ''
+    }
+
+    componentWillMount() {
+        this.props.initTasks();
+    }
+
+    textChanged = (event) => {
+        this.setState({task: event.target.value});
+    }
+
+    searchChanged = (event) => {
+        this.props.searchTask(event.target.value);
+    }
+
+    handleSubmit = (event) => {
+        if (this.state.task !== '') {
+            this.props.addNewTask(this.state.task);
+            this.setState({task: ''});
         }
     }
-    componentDidMount() {
-        database.ref('/todo/')
-            .on('value', (snapshot) => {
-                let items = snapshot.val();
-                let newState = [];
-                for (let item in items) {
-                    newState.unshift({
-                        id: item,
-                        name: items[item].name,
-                        checked: items[item].checked,
-                        timeStamp: items[item].timeStamp,
-                    });
-                }
-                this.setState({
-                    tasks: newState});
-            });
-    };
 
-    setFilterText = (fiterText) => {
-        this.setState({fiterText: fiterText})
-    };
+    delTask = task => {
+        this.props.removeTask(task);
+    }
+
+    onPressEnterKey = (event) => {
+        if (event.charCode === 13 && this.state.task !== '') {
+            event.preventDefault();
+            this.props.addNewTask(this.state.task);
+            this.setState({task: ''});
+        }
+    }
+
+    checkboxChange = (task, checked, taskName) => {
+        this.props.checkboxChange(task, checked, taskName);
+    }
 
     render() {
         return (
             <div>
-                <div>
-                    <AddBox />
-                </div>
-                <div>
-                    <FilterBox changeFilter={this.setFilterText}/>
+                <div className="submit_box">
+                    <TextField
+                        placeholder="Add task"
+                        value={this.state.task}
+                        onChange={this.textChanged}
+                        onKeyPress={this.onPressEnterKey}/>
+                    <AddCircle
+                        raised="raised"
+                        color="primary"
+                        mini="true"
+                        dense="true"
+                        onClick={this.handleSubmit}>
+                        >
+
+                    </AddCircle>
+                    <TextField
+                        placeholder="Search tasks"
+                        onChange={this.searchChanged}
+                        className="search"/>
                 </div>
                 <TasksList
-                    tasks = {this.state.tasks.filter(el => el.name.toUpperCase().search(this.state.fiterText.toUpperCase()) !== -1)} />
+                    query={this.props.query}
+                    tasks={this.props.tasksList}
+                    checkboxChange={this.checkboxChange}
+                    delTask={this.delTask}/>
             </div>
         );
     }
 }
 
-export default ToDo;
+export default connect(mapStateToProps, mapDispatchToProps)(Todo);

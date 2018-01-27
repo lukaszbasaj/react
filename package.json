@@ -2,19 +2,27 @@
   "name": "todo",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://lukaszbasaj.github.io/react-todo/",
   "dependencies": {
-    "firebase": "^4.8.2",
-    "material-ui": "^1.0.0-beta.28",
+    "firebase": "^4.9.0",
+    "firebase-tools": "^3.17.4",
+    "material-ui": "^1.0.0-beta.23",
     "material-ui-icons": "^1.0.0-beta.17",
     "react": "^16.1.1",
-    "react-dom": "^16.1.1",
-    "react-material-icons": "^1.0.3",
-    "react-scripts": "1.0.17"
+    "react-dom": "^16.2.0",
+    "react-redux": "^5.0.6",
+    "react-router-dom": "^4.2.2",
+    "react-scripts": "1.0.17",
+    "redux": "^3.7.2",
+    "redux-thunk": "^2.2.0"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  }
+  },
+  "proxy": "https://jsonplaceholder.typicode.com"
 }
