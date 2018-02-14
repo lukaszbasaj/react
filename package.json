@@ -2,7 +2,7 @@
   "name": "todo",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://lukaszbasaj.github.io/react-todo-previous/",
+  "homepage": "https://lukaszbasaj.github.io/react-todo",
   "dependencies": {
     "firebase": "^4.9.0",
     "firebase-tools": "^3.17.4",
