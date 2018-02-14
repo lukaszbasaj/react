@@ -2,7 +2,7 @@
   "name": "todo",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://lukaszbasaj.github.io/react-todo/",
+  "homepage": "https://lukaszbasaj.github.io/react-todo-previous/",
   "dependencies": {
     "firebase": "^4.9.0",
     "firebase-tools": "^3.17.4",
@@ -19,8 +19,8 @@
   },
   "scripts": {
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
+    "deploy": "gh-pages -d build",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
