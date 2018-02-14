@@ -61,7 +61,7 @@ class Todo extends Component {
     render() {
         return (
 
-                <Grid container spacing={24}>
+                <Grid container spacing={18}>
             <Grid xs={7}>
                 <div className="submit_box">
 
