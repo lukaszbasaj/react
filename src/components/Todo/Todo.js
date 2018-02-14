@@ -3,7 +3,7 @@ import TasksList from './elements/TasksListElement';
 import {connect} from 'react-redux';
 import {add, search, remove, checkboxChange, init} from '../state';
 import AddCircle from 'material-ui-icons/AddCircle';
-
+import Grid from 'material-ui/Grid';
 import TextField from 'material-ui/TextField';
 
 
@@ -60,8 +60,11 @@ class Todo extends Component {
 
     render() {
         return (
-            <div>
+
+                <Grid container spacing={24}>
+            <Grid xs={7}>
                 <div className="submit_box">
+
                     <TextField
                         placeholder="Add task"
                         value={this.state.task}
@@ -76,17 +79,23 @@ class Todo extends Component {
                         >
 
                     </AddCircle>
+                </div>
+            </Grid>
                     <TextField
                         placeholder="Search tasks"
                         onChange={this.searchChanged}
                         className="search"/>
-                </div>
+
+                <Grid xs={12}>
                 <TasksList
                     query={this.props.query}
                     tasks={this.props.tasksList}
                     checkboxChange={this.checkboxChange}
                     delTask={this.delTask}/>
-            </div>
+
+                    </Grid>
+                </Grid>
+
         );
     }
 }
